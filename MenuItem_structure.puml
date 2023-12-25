@@ -1,0 +1,199 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 6,
+    "backwardDepth": 6,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "MenuItem",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1889616031 { 
+   	label=OrderManager
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   OrderManager1889616031[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)OrderManager</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   orders: Queue&lt;Order&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addOrder(orderId: int, items: LinkedList&lt;MenuItem&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ deleteOrder(orderId: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ displayOrders()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_300531410 { 
+   	label=MenuManager
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   MenuManager300531410[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)MenuManager</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   menuItems: LinkedList&lt;MenuItem&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addMenuItem(itemName: String, price: double, description: String, category: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ displayAllMenuItems()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ displayMenuItemsByCategory(category: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ filterAbovePrice(price: double)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ filterBelowPrice(price: double)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ filterBetweenPrices(minPrice: double, maxPrice: double)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getMenuItem(itemName: String): MenuItem</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getMenuItemById(itemId: int): MenuItem</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getMenuItemsByCategory(category: String): LinkedList&lt;MenuItem&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ removeMenuItem(itemName: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ searchByName(itemName: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ searchByNameAndCategory(itemName: String, category: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ suggestRandomAppetizer()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_539451086 { 
+   	label=MenuItem
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   MenuItem539451086[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)MenuItem</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   category: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   description: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   itemId: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   itemName: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   price: double [1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_76453678 { 
+   	label=Order
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Order76453678[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Order</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   items: LinkedList&lt;MenuItem&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   orderId: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   timestamp: LocalDateTime [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addMenuItem(menuItem: MenuItem)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ calculateTotalPrice(): double</TD></TR>
+<TR><TD ALIGN="LEFT" >+ displayOrderItems()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+MenuManager300531410 -> MenuItem539451086[label="menuItems
+[0..*]"];
+Order76453678 -> MenuItem539451086[label="items
+[0..*]"];
+OrderManager1889616031 -> Order76453678[label="orders
+[0..*]"];
+    
+}
+@enduml

@@ -1,0 +1,139 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "InventoryItem",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1954295087 { 
+   	label=InventoryManager
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   InventoryManager1954295087[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)InventoryManager</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   root: InventoryItem</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addItem(itemName: String, quantity: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >- addItemRecursive(root: InventoryItem, itemName: String, quantity: int): InventoryItem</TD></TR>
+<TR><TD ALIGN="LEFT" >+ displayInventory()</TD></TR>
+<TR><TD ALIGN="LEFT" >- displayInventoryRecursive(root: InventoryItem)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ searchItem(itemName: String): InventoryItem</TD></TR>
+<TR><TD ALIGN="LEFT" >- searchItemRecursive(root: InventoryItem, itemName: String): InventoryItem</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_726783377 { 
+   	label=InventoryItem
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   InventoryItem726783377[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)InventoryItem</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   itemName: String</TD></TR>
+<TR><TD ALIGN="LEFT" >#   left: InventoryItem </TD></TR>
+<TR><TD ALIGN="LEFT" >#   quantity: int </TD></TR>
+<TR><TD ALIGN="LEFT" >#   right: InventoryItem </TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+InventoryManager1954295087 -> InventoryItem726783377[label="root
+"];
+    
+}
+@enduml

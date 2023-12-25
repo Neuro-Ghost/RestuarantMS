@@ -1,0 +1,173 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "ReservationManager",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_104786860 { 
+   	label=Reservation
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Reservation104786860[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Reservation</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   numberOfCustomers: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   reservationID: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   reservationName: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   reservationTime: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   table: Table [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_746488417 { 
+   	label=ReservationManager
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   ReservationManager746488417[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ReservationManager</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   tableReservationMap: HashMap&lt;Table, Reservation&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   tables: ArrayList&lt;Table&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addReservation(reservationTime: String, reservationName: String, numberOfCustomers: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ addTable(table: Table)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ displayAllReservations()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ displayAllTables()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ displayAvailableTables()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getTableById(tableNumber: int): Table</TD></TR>
+<TR><TD ALIGN="LEFT" >+ removeReservation(reservationID: int)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_80563118 { 
+   	label=Table
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Table80563118[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Table</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   isReserved: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   tableCapacity: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   tableNumber: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ display()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ reserve()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ unreserve()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+Reservation104786860 -> Table80563118[label="table
+[0..1]"];
+ReservationManager746488417 -> Reservation104786860[label="tableReservationMap
+[0..*]"];
+ReservationManager746488417 -> Table80563118[label="tableReservationMap
+[0..*]"];
+ReservationManager746488417 -> Table80563118[label="tables
+[0..*]"];
+    
+}
+@enduml
